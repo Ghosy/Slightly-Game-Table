@@ -20,6 +20,7 @@ public class Main {
 						System.out.println("Not enough arguments");
 						break;
 					}
+
 					List<JLabel> labels = new ArrayList<JLabel>();
 					for(DispScreen d: screens) {
 						d.spawnItem(new Item(sargs[1], sargs[2]), labels);
@@ -29,8 +30,21 @@ public class Main {
 				case "exit":
 					exit();
 					break;
-				case "test":
-					System.out.println("This is a test.");
+				case "load":
+					if(sargs.length < 2) {
+						System.out.println("Not enough arguments");
+						break;
+					}
+
+					System.out.println("This feature has not been implemented yet.");
+					break;
+				case "save":
+					if(sargs.length < 2) {
+						System.out.println("Not enough arguments");
+						break;
+					}
+
+					System.out.println("This feature has not been implemented yet.");
 					break;
 				case "start":
 					screens.add(new DispScreen("Public", true));
@@ -51,5 +65,9 @@ public class Main {
 			d.dispose();
 		}
 		System.exit(0);
+	}
+
+	public static void argCheck(int val) {
+	
 	}
 }
