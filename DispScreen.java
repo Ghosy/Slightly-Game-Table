@@ -32,6 +32,8 @@ public class DispScreen extends JFrame {
 		label.addMouseMotionListener(new Movement());
 		label.addComponentListener(new ChangeSync(labels));
 		panel.add(label);
-		label.setBounds(50, 50, img.getIconWidth(), img.getIconHeight());
+		label.setBounds(i.getX(), i.getY(), img.getIconWidth(), img.getIconHeight());
+		// Make sure everything is up to date
+		panel.repaint();
 	}
 }

@@ -23,6 +23,7 @@ public class Item {
 			List<String> lines = Files.readAllLines(Paths.get(itemPath + name));
 			isPrivate = "private".equals(lines.get(0));
 			pubImg = new ImageIcon(imgPath + lines.get(1));
+			// If item config should have privImg
 			if(isPrivate) {
 				privImg = new ImageIcon(imgPath + lines.get(2));
 			}
@@ -32,8 +33,8 @@ public class Item {
 
 		this.name = name;
 		this.owner = owner;
-		x = 0;
-		y = 0;
+		this.x = 0;
+		this.y = 0;
 	}
 
 	public Item(String name, String owner, int x, int y) {
