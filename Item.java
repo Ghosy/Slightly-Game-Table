@@ -4,9 +4,10 @@ import java.util.List;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 
-public class Item {
+public class Item extends JLabel {
 	private final String itemPath = "items/";
 	private final String imgPath = "images/";;
 
@@ -15,10 +16,9 @@ public class Item {
 	private boolean isPrivate;
 	private ImageIcon pubImg;
 	private ImageIcon privImg;
-	private int x;
-	private int y;
 
 	public Item(String name, String owner) {
+		super(new ImageIcon());
 		try {
 			List<String> lines = Files.readAllLines(Paths.get(itemPath + name));
 			isPrivate = "private".equals(lines.get(0));
@@ -33,14 +33,13 @@ public class Item {
 
 		this.name = name;
 		this.owner = owner;
-		this.x = 0;
-		this.y = 0;
 	}
 
-	public Item(String name, String owner, int x, int y) {
-		this(name, owner);
-		this.x = x;
-		this.y = y;
+	public void init(String playerContext) {
+		if(isPrivate && (playerContext.equals(owner) || playerContext.equals("Public")))
+			super.setIcon(privImg);
+		else
+			super.setIcon(pubImg);
 	}
 
 	public String getName() {
@@ -51,25 +50,10 @@ public class Item {
 		return isPrivate;
 	}
 
-	public ImageIcon getImg(String player) {
-		// If item is private and owner/public asking
-		if(isPrivate && (player.equals(owner) || player.equals("Public")))
-			return privImg;
-		return pubImg;
-	}
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
+	// public ImageIcon getImg(String player) {
+	// 	// If item is private and owner/public asking
+	// 	if(isPrivate && (player.equals(owner) || player.equals("Public")))
+	// 		return privImg;
+	// 	return pubImg;
+	// }
 }

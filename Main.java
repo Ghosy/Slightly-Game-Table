@@ -1,7 +1,6 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import javax.swing.JLabel;
 
 public class Main {
 	private static List<DispScreen> screens = new ArrayList<DispScreen>(3);
@@ -21,9 +20,9 @@ public class Main {
 						break;
 					}
 
-					List<JLabel> labels = new ArrayList<JLabel>();
+					List<Item> items = new ArrayList<Item>();
 					for(DispScreen d: screens) {
-						d.spawnItem(new Item(sargs[1], sargs[2]), labels);
+						d.spawnItem(new Item(sargs[1], sargs[2]), items);
 					}
 					System.out.println(sargs[1] + " added");
 					break;

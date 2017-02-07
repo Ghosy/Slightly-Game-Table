@@ -1,9 +1,8 @@
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
-import javax.swing.ImageIcon;
+import javax.swing.Icon;
 
 public class DispScreen extends JFrame {
 	private String owner;
@@ -24,15 +23,16 @@ public class DispScreen extends JFrame {
 		return owner;
 	}
 
-	public void spawnItem(Item i, List<JLabel> labels) {
-		ImageIcon img = i.getImg(owner);
-		JLabel label = new JLabel(img);
-		labels.add(label);
-		label.addMouseListener(new Movement());
-		label.addMouseMotionListener(new Movement());
-		label.addComponentListener(new ChangeSync(labels));
-		panel.add(label);
-		label.setBounds(i.getX(), i.getY(), img.getIconWidth(), img.getIconHeight());
+	public void spawnItem(Item i, List<Item> items) {
+		// Setup item based on owner context of DispScreen
+		i.init(owner);
+		items.add(i);
+		i.addMouseListener(new Movement());
+		i.addMouseMotionListener(new Movement());
+		i.addComponentListener(new ChangeSync(items));
+		panel.add(i);
+		Icon img = i.getIcon();
+		i.setBounds(i.getX(), i.getY(), img.getIconWidth(), img.getIconHeight());
 		// Make sure everything is up to date
 		panel.repaint();
 	}
