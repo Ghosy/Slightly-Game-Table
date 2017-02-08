@@ -1,12 +1,15 @@
 import java.util.List;
+import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.swing.Icon;
 
 public class DispScreen extends JFrame {
 	private String owner;
 	private JPanel panel;
+	private JLabel background;
 
 	public DispScreen(String owner, boolean isPublic) {
 		this.owner = owner;
@@ -15,12 +18,27 @@ public class DispScreen extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
 		panel = new JPanel();
-		panel.setLayout(null);
 		add(panel);
+		// Create background label
+		background = new JLabel() {
+			@Override
+			public boolean isOptimizedDrawingEnabled() {
+				return false;
+			}
+		};
+		background.setBounds(0, 0, 800, 600);
+		panel.setLayout(new BorderLayout());
+		panel.add(background);
+		panel.setLayout(null);
 	}
 
 	public String getowner() {
 		return owner;
+	}
+
+	public void changeBackground(Icon icon) {
+		background.setIcon(icon);
+		panel.repaint();
 	}
 
 	public void spawnItem(Item i, List<Item> items) {

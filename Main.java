@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 public class Main {
 	private static List<DispScreen> screens = new ArrayList<DispScreen>(3);
@@ -25,6 +26,16 @@ public class Main {
 						d.spawnItem(new Item(sargs[1], sargs[2]), items);
 					}
 					System.out.println(sargs[1] + " added");
+					break;
+				case "background":
+					if(sargs.length < 2) {
+						System.out.println("Not enough arguments");
+						break;
+					}
+					for(DispScreen d: screens) {
+						d.changeBackground(new ImageIcon("images/" + sargs[1]));
+					}
+						System.out.println(sargs[1]);
 					break;
 				case "exit":
 					exit();
